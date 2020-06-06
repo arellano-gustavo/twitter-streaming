@@ -16,7 +16,7 @@ public class TwitterConfig {
 
   @Bean
   TwitterStreamFactory twitterStreamFactory() {
-    return new TwitterStreamFactory(Conf.ok());
+    return new TwitterStreamFactory();
   }
 
   @Bean
@@ -32,7 +32,7 @@ public class TwitterConfig {
   @Bean
   TwitterMessageProducer twitterMessageProducer(TwitterStream twitterStream, MessageChannel outputChannel) {
     TwitterMessageProducer twitterMessageProducer = new TwitterMessageProducer(twitterStream, outputChannel);
-    twitterMessageProducer.setTerms(Arrays.asList("arellano_gus"));
+    twitterMessageProducer.setTerms(Arrays.asList("coronavirus"));
     return twitterMessageProducer;
   }
 
