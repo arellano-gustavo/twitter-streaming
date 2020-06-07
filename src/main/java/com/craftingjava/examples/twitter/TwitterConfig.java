@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.channel.MessageChannels;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import twitter4j.Status;
 import twitter4j.TwitterStream;
@@ -40,8 +41,12 @@ public class TwitterConfig {
   IntegrationFlow twitterFlow(MessageChannel outputChannel) {
     return IntegrationFlows.from(outputChannel)
         .transform(Status::getText)
-        .handle(m -> System.out.println(m.getPayload().toString()))
+        .handle(m -> prn(m))
         .get();
   }
 
+  private void prn(Message<?> m) {
+    System.out.println(m.getPayload().toString());
+  }
+  
 }
